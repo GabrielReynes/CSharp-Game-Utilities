@@ -1,6 +1,4 @@
-﻿using Utilities.DataStructure;
-
-namespace Utilities.Search;
+﻿namespace Utilities.DataStructure;
 
 internal interface ISearchStruct<T>
 {
