@@ -1,4 +1,5 @@
-﻿using Utilities.Search;
+﻿using System.Collections;
+using Utilities.Search;
 
 namespace Utilities.DataStructure;
 
