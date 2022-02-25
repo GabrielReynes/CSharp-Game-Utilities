@@ -28,13 +28,8 @@ internal class GraphNode<T> : IComparable<GraphNode<T>>
     public T[] RetracePath()
     {
         Stack<T> path = new Stack<T>();
-        GraphNode<T>? aux = this;
-        while (aux != null)
-        {
+        for (GraphNode<T>? aux = this; aux != null; aux = aux.Parent)
             path.Push(aux.Element);
-            aux = aux.Parent;
-        }
-
         return path.ToArray();
     }
 }
