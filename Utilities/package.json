@@ -1,0 +1,7 @@
+{
+  "name": "com.greynes.utilities",
+  "displayName": "GReynes Utilities",
+  "version": "0.1",
+  "unity": "2020.3",
+  "description": "Some algorithm utilities"
+}
