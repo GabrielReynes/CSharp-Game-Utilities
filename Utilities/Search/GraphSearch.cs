@@ -8,17 +8,20 @@ namespace Utilities.Search
             out HashSet<T> seenNodes, uint maxCost = uint.MaxValue, bool throwException = true)
         {
             T startState = searchProblem.GetStartState();
-            seenNodes = new HashSet<T>() {startState};
+            seenNodes = new HashSet<T>();
             searchStruct.Add(new GraphNode<T>(startState));
             while (!searchStruct.Empty())
             {
                 GraphNode<T> elm = searchStruct.Remove();
+                if (seenNodes.Contains(elm.Element)) continue;
                 if (searchProblem.EndStatePredicate(elm.Element)) return elm.RetracePath();
+                seenNodes.Add(elm.Element);
+                
                 if (elm.Cost == maxCost) continue;
 
                 foreach (T neighbour in searchProblem.NeighboursFetch(elm.Element))
                 {
-                    if (searchProblem.ObstaclePredicate(neighbour) || seenNodes.Contains(neighbour)) continue;
+                    if (searchProblem.ObstaclePredicate(neighbour)) continue;
 
                     GraphNode<T> neighbourNode = new GraphNode<T>(neighbour, elm)
                     {
@@ -27,7 +30,6 @@ namespace Utilities.Search
                     };
 
                     searchStruct.Add(neighbourNode);
-                    seenNodes.Add(neighbour);
                 }
             }
 

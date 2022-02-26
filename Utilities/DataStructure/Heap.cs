@@ -2,29 +2,39 @@
 
 namespace Utilities.DataStructure
 {
-    /*
-     * Classic Heap. Takes HeapNodes always keeps the one with minimum cost on top.
-     */
+    /// <summary>
+    /// Classic Heap. Always keeps the node with minimum cost on top.
+    /// </summary>
+    /// <typeparam name="T">The type to store</typeparam>
     internal class Heap<T> : ISearchStruct<T> {
     
-        private readonly GraphNode<T>[] _items;
-        public int Length { get; private set; }
-        public bool Empty() => Length == 0;
+        private GraphNode<T>[] _items;
+        private int _length;
+        public bool Empty() => _length == 0;
     
-        public Heap(int size) {
-            _items = new GraphNode<T>[size];
-            Length = 0;
+        public Heap(int initialCapacity) {
+            _items = new GraphNode<T>[initialCapacity];
+            _length = 0;
+        }
+
+        private void Resize()
+        {
+            GraphNode<T>[] newArray = new GraphNode<T>[_items.Length * 2];
+            Array.Copy(_items, newArray, _items.Length);
+            _items = newArray;
         }
     
-        public void Add(GraphNode<T> item) {
-            _items[Length] = item;
+        public void Add(GraphNode<T> item)
+        {
+            if (_length == _items.Length) Resize();
+            _items[_length] = item;
             SortUp(item);
-            Length++;
+            _length++;
         }
     
         public GraphNode<T> Remove() {
             GraphNode<T> firstItem = _items[0];
-            _items[0] = _items[--Length];
+            _items[0] = _items[--_length];
             SortDown(_items[0]);
             return firstItem;
         }
@@ -37,11 +47,11 @@ namespace Utilities.DataStructure
                 int childIndexLeft = auxIndex * 2 + 1;
                 int childIndexRight = auxIndex * 2 + 2;
 
-                if (childIndexLeft < Length)
+                if (childIndexLeft < _length)
                 {
                     int swapIndex = childIndexLeft;
 
-                    if (childIndexRight < Length)
+                    if (childIndexRight < _length)
                     {
                         if (_items[childIndexLeft].CompareTo(_items[childIndexRight]) > 0)
                         {
@@ -62,7 +72,7 @@ namespace Utilities.DataStructure
 
         private void SortUp(GraphNode<T> item)
         {
-            int auxIndex = Length;
+            int auxIndex = _length;
             while (true)
             {
                 int parentIndex = (auxIndex - 1) / 2;
