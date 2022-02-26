@@ -32,7 +32,7 @@ namespace Utilities.Search
             }
 
             if (throwException) throw new Exception("No path was found.");
-            return Array.Empty<T>();
+            return null!;
         }
 
         private static T[] ClassicSearch<T>(ISearchStruct<T> searchStruct, SearchProblem<T> searchProblem, 
@@ -58,7 +58,7 @@ namespace Utilities.Search
 
         public static T[] Propagation<T>(SearchProblem<T> searchProblem, uint maxCost = uint.MaxValue)
         {
-            T[] _ = ClassicSearch(new MyQueue<T>(), searchProblem, out HashSet<T> seenNodes, maxCost, false);
+            ClassicSearch(new MyQueue<T>(), searchProblem, out HashSet<T> seenNodes, maxCost, false);
             return seenNodes.ToArray();
         }
     }
