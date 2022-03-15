@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using Utilities.Search;
+using GraphSearchUtilities.Search;
 
-namespace Utilities.DataStructure;
+namespace GraphSearchUtilities.DataStructure;
 
 internal class MyQueue<T> : ISearchStruct<T>
 {

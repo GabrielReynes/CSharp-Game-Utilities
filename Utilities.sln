@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{D2A34BA7-A3AA-403C-8C79-4ACDA8193C85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphSearchUtilities", "GraphSearchUtilities\GraphSearchUtilities.csproj", "{D2A34BA7-A3AA-403C-8C79-4ACDA8193C85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

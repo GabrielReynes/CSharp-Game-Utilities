@@ -1,4 +1,4 @@
-﻿namespace Utilities.Search;
+﻿namespace GraphSearchUtilities.Search;
 
 public class SearchProblem<T>
 {

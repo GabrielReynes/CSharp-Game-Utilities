@@ -1,6 +1,4 @@
-﻿using Utilities.Search;
-
-namespace Utilities.DataStructure
+﻿namespace GraphSearchUtilities.DataStructure
 {
     /// <summary>
     /// Classic Heap. Always keeps the node with minimum cost on top.

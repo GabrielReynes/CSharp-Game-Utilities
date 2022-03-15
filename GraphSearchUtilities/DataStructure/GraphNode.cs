@@ -1,4 +1,4 @@
-﻿namespace Utilities.DataStructure;
+﻿namespace GraphSearchUtilities.DataStructure;
 
 internal class GraphNode<T> : IComparable<GraphNode<T>>
 {

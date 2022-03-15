@@ -1,6 +1,6 @@
-﻿using Utilities.Search;
+﻿using GraphSearchUtilities.Search;
 
-namespace Utilities.DataStructure;
+namespace GraphSearchUtilities.DataStructure;
 
 internal class MyStack<T> : ISearchStruct<T>
 {

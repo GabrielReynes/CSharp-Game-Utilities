@@ -1,6 +1,6 @@
-﻿using Utilities.DataStructure;
+﻿using GraphSearchUtilities.DataStructure;
 
-namespace Utilities.Search
+namespace GraphSearchUtilities.Search
 {
     public static class GraphSearch
     {
