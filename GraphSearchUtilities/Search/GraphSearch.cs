@@ -16,7 +16,9 @@ namespace GraphSearchUtilities.Search
                 if (seenNodes.Contains(elm.Element)) continue;
                 if (searchProblem.EndStatePredicate(elm.Element)) return elm.RetracePath();
                 seenNodes.Add(elm.Element);
-                
+
+                if (elm.Parent is { } parent) searchProblem.CoupleAction(elm.Element, parent.Element);
+
                 if (elm.Cost == maxCost) continue;
 
                 foreach (T neighbour in searchProblem.NeighboursFetch(elm.Element))
@@ -25,7 +27,7 @@ namespace GraphSearchUtilities.Search
 
                     GraphNode<T> neighbourNode = new GraphNode<T>(neighbour, elm)
                     {
-                        Cost = elm.Cost + 1,
+                        Cost = elm.Cost + searchProblem.Cost(elm.Element, neighbour),
                         Heuristic = searchProblem.Heuristic(neighbour)
                     };
 
@@ -58,10 +60,20 @@ namespace GraphSearchUtilities.Search
             return ClassicSearch(new MyStack<T>(), searchProblem);
         }
 
-        public static T[] Propagation<T>(SearchProblem<T> searchProblem, uint maxCost = uint.MaxValue)
+        private static HashSet<T> Propagation<T>(ISearchStruct<T> dataStruct, SearchProblem<T> searchProblem, uint maxCost)
         {
-            ClassicSearch(new MyQueue<T>(), searchProblem, out HashSet<T> seenNodes, maxCost, false);
-            return seenNodes.ToArray();
+            ClassicSearch(dataStruct, searchProblem, out HashSet<T> seenNodes, maxCost, false);
+            return seenNodes;
+        }
+
+        public static HashSet<T> BreadthFirstPropagation<T>(SearchProblem<T> searchProblem, uint maxCost = uint.MaxValue)
+        {
+            return Propagation(new MyQueue<T>(), searchProblem, maxCost);
+        }
+        
+        public static HashSet<T> DepthFirstPropagation<T>(SearchProblem<T> searchProblem, uint maxCost = uint.MaxValue)
+        {
+            return Propagation(new MyStack<T>(), searchProblem, maxCost);
         }
     }
 }
