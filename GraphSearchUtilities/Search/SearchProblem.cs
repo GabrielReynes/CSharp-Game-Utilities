@@ -1,6 +1,6 @@
 ﻿namespace GraphSearchUtilities.Search;
 
-public struct SearchProblem<T>
+public class SearchProblem<T>
 {
     public readonly Func<T> GetStartState;
     public readonly Func<T, IEnumerable<T>> NeighboursFetch;
