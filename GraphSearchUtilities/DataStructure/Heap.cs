@@ -4,13 +4,15 @@
     /// Classic Heap. Always keeps the node with minimum cost on top.
     /// </summary>
     /// <typeparam name="T">The type to store</typeparam>
-    internal class Heap<T> : ISearchStruct<T> {
-    
+    internal class Heap<T> : ISearchStruct<T>
+    {
+
         private GraphNode<T>[] _items;
         private int _length;
         public bool Empty() => _length == 0;
-    
-        public Heap(int initialCapacity) {
+
+        public Heap(int initialCapacity)
+        {
             _items = new GraphNode<T>[initialCapacity];
             _length = 0;
         }
@@ -21,7 +23,7 @@
             Array.Copy(_items, newArray, _items.Length);
             _items = newArray;
         }
-    
+
         public void Add(GraphNode<T> item)
         {
             if (_length == _items.Length) Resize();
@@ -29,14 +31,15 @@
             SortUp(item);
             _length++;
         }
-    
-        public GraphNode<T> Remove() {
+
+        public GraphNode<T> Remove()
+        {
             GraphNode<T> firstItem = _items[0];
             _items[0] = _items[--_length];
             SortDown(_items[0]);
             return firstItem;
         }
-        
+
         private void SortDown(GraphNode<T> item)
         {
             int auxIndex = 0;

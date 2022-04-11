@@ -1,28 +1,29 @@
 ﻿using GraphSearchUtilities.Search;
 
-namespace GraphSearchUtilities.DataStructure;
-
-internal class MyStack<T> : ISearchStruct<T>
+namespace GraphSearchUtilities.DataStructure
 {
-    private readonly Stack<GraphNode<T>> _stack;
-
-    public MyStack()
+    internal class MyStack<T> : ISearchStruct<T>
     {
-        _stack = new Stack<GraphNode<T>>();
-    }
+        private readonly Stack<GraphNode<T>> _stack;
 
-    public void Add(GraphNode<T> obj)
-    {
-        _stack.Push(obj);
-    }
+        public MyStack()
+        {
+            _stack = new Stack<GraphNode<T>>();
+        }
 
-    public GraphNode<T> Remove()
-    {
-        return _stack.Pop();
-    }
+        public void Add(GraphNode<T> obj)
+        {
+            _stack.Push(obj);
+        }
 
-    public bool Empty()
-    {
-        return _stack.Count == 0;
+        public GraphNode<T> Remove()
+        {
+            return _stack.Pop();
+        }
+
+        public bool Empty()
+        {
+            return _stack.Count == 0;
+        }
     }
 }
