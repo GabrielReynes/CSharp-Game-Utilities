@@ -2,7 +2,6 @@
 
 public class TdLearningProblem<TState, TAction, TKey> : QLearningProblem<TState, TAction> where TKey : notnull
 {
-
     public delegate Dictionary<TKey, float> FeatureExtractor(TState state, TAction action);
 
     public readonly FeatureExtractor GetFeatureVector;

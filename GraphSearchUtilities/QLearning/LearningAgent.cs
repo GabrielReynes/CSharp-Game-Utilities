@@ -42,14 +42,17 @@ public abstract class LearningAgent<TState, TAction> where TAction : struct
                 : ComputeAction(state, legalActions);
         }
         
-        public void Train(TState state, int maxIterations)
+        public int Train(TState state, int maxIterations)
         {
-            for (int i = 0; i < maxIterations && !LearningProblem.EndState(state); i++)
+            int i = 0;
+            for (; i < maxIterations && !LearningProblem.EndState(state); i++)
             {
                 TAction action = GetAction(state);
                 UpdateValue(state, action);
                 state = LearningProblem.GetNextState(state, action);
             }
+
+            return i;
         }
 
         protected float UpdatedValue(TState state, TAction action, TState nextState, float reward)
