@@ -1,22 +1,20 @@
-﻿using GraphSearchUtilities.Search;
-
-namespace GraphSearchUtilities.DataStructure
+﻿namespace GameUtilities.DataStructure
 {
     internal class MyStack<T> : ISearchStruct<T>
     {
-        private readonly Stack<GraphNode<T>> _stack;
+        private readonly Stack<T> _stack;
 
         public MyStack()
         {
-            _stack = new Stack<GraphNode<T>>();
+            _stack = new Stack<T>();
         }
 
-        public void Add(GraphNode<T> obj)
+        public void Add(T obj)
         {
             _stack.Push(obj);
         }
 
-        public GraphNode<T> Remove()
+        public T Remove()
         {
             return _stack.Pop();
         }

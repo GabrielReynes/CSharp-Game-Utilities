@@ -1,4 +1,4 @@
-﻿namespace GraphSearchUtilities.QLearning;
+﻿namespace GameUtilities.QLearning;
 
 public class TdLearningProblem<TState, TAction, TKey> : QLearningProblem<TState, TAction> where TKey : notnull
 {

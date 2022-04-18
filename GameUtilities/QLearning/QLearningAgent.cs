@@ -1,6 +1,6 @@
-﻿using GraphSearchUtilities.DataStructure;
+﻿using GameUtilities.DataStructure;
 
-namespace GraphSearchUtilities.QLearning
+namespace GameUtilities.QLearning
 {
     public class QLearningAgent<TState, TAction> : LearningAgent<TState, TAction> where TAction : struct
     {

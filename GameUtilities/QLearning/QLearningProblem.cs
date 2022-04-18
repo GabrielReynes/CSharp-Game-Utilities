@@ -1,4 +1,4 @@
-﻿namespace GraphSearchUtilities.QLearning
+﻿namespace GameUtilities.QLearning
 {
     public class QLearningProblem<TState, TAction> : ILearningProblem<TState, TAction>
     {

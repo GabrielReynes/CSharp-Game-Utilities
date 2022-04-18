@@ -1,4 +1,4 @@
-﻿namespace GraphSearchUtilities.DataStructure
+﻿namespace GameUtilities.DataStructure
 {
     public class DefaultDict<TKey, TVal> where TKey : notnull
     {

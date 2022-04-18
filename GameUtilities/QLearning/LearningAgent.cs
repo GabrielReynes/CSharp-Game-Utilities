@@ -1,4 +1,4 @@
-﻿namespace GraphSearchUtilities.QLearning;
+﻿namespace GameUtilities.QLearning;
 
 public abstract class LearningAgent<TState, TAction> where TAction : struct
 {

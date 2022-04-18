@@ -1,10 +1,10 @@
-﻿using GraphSearchUtilities.DataStructure;
+﻿using GameUtilities.DataStructure;
 
-namespace GraphSearchUtilities.Search
+namespace GameUtilities.Search
 {
     public static class GraphSearch
     {
-        private static T[] ClassicSearch<T>(ISearchStruct<T> searchStruct, SearchProblem<T> searchProblem,
+        private static T[] ClassicSearch<T>(ISearchStruct<GraphNode<T>> searchStruct, SearchProblem<T> searchProblem,
             out HashSet<T> seenNodes, uint maxCost = uint.MaxValue, bool throwException = true)
         {
             T startState = searchProblem.GetStartState();
@@ -39,7 +39,7 @@ namespace GraphSearchUtilities.Search
             return null!;
         }
 
-        private static T[] ClassicSearch<T>(ISearchStruct<T> searchStruct, SearchProblem<T> searchProblem, 
+        private static T[] ClassicSearch<T>(ISearchStruct<GraphNode<T>> searchStruct, SearchProblem<T> searchProblem, 
             uint maxCost = uint.MaxValue)
         {
             return ClassicSearch(searchStruct, searchProblem, out HashSet<T> _, maxCost);
@@ -47,20 +47,20 @@ namespace GraphSearchUtilities.Search
 
         public static T[] AStar<T>(SearchProblem<T> searchProblem, int heapSize)
         {
-            return ClassicSearch(new Heap<T>(heapSize), searchProblem);
+            return ClassicSearch(new Heap<GraphNode<T>>(heapSize), searchProblem);
         }
 
         public static T[] BreadthFirstSearch<T>(SearchProblem<T> searchProblem)
         {
-            return ClassicSearch(new MyQueue<T>(), searchProblem);
+            return ClassicSearch(new MyQueue<GraphNode<T>>(), searchProblem);
         }
         
         public static T[] DepthFirstSearch<T>(SearchProblem<T> searchProblem)
         {
-            return ClassicSearch(new MyStack<T>(), searchProblem);
+            return ClassicSearch(new MyStack<GraphNode<T>>(), searchProblem);
         }
 
-        private static HashSet<T> Propagation<T>(ISearchStruct<T> dataStruct, SearchProblem<T> searchProblem, uint maxCost)
+        private static HashSet<T> Propagation<T>(ISearchStruct<GraphNode<T>> dataStruct, SearchProblem<T> searchProblem, uint maxCost)
         {
             ClassicSearch(dataStruct, searchProblem, out HashSet<T> seenNodes, maxCost, false);
             return seenNodes;
@@ -68,12 +68,12 @@ namespace GraphSearchUtilities.Search
 
         public static HashSet<T> BreadthFirstPropagation<T>(SearchProblem<T> searchProblem, uint maxCost = uint.MaxValue)
         {
-            return Propagation(new MyQueue<T>(), searchProblem, maxCost);
+            return Propagation(new MyQueue<GraphNode<T>>(), searchProblem, maxCost);
         }
         
         public static HashSet<T> DepthFirstPropagation<T>(SearchProblem<T> searchProblem, uint maxCost = uint.MaxValue)
         {
-            return Propagation(new MyStack<T>(), searchProblem, maxCost);
+            return Propagation(new MyStack<GraphNode<T>>(), searchProblem, maxCost);
         }
     }
 }

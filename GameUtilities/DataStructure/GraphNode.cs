@@ -1,4 +1,4 @@
-﻿namespace GraphSearchUtilities.DataStructure
+﻿namespace GameUtilities.DataStructure
 {
 
     internal class GraphNode<T> : IComparable<GraphNode<T>>

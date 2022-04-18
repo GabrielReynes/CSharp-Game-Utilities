@@ -1,24 +1,21 @@
-﻿using System.Collections;
-using GraphSearchUtilities.Search;
-
-namespace GraphSearchUtilities.DataStructure
+﻿namespace GameUtilities.DataStructure
 {
 
     internal class MyQueue<T> : ISearchStruct<T>
     {
-        private readonly Queue<GraphNode<T>> _queue;
+        private readonly Queue<T> _queue;
 
         public MyQueue()
         {
-            _queue = new Queue<GraphNode<T>>();
+            _queue = new Queue<T>();
         }
 
-        public void Add(GraphNode<T> obj)
+        public void Add(T obj)
         {
             _queue.Enqueue(obj);
         }
 
-        public GraphNode<T> Remove()
+        public T Remove()
         {
             return _queue.Dequeue();
         }
