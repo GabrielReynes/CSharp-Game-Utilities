@@ -2,9 +2,9 @@
 
 namespace GameUtilities.QLearning
 {
-    public class QLearningAgent<TState, TAction> : LearningAgent<TState, TAction> where TAction : struct
+    public class QLearningAgent<TState, TAction> : LearningAgent<TState, TAction>
+        where TAction : struct, IEquatable<TAction> where TState : IEquatable<TState>
     {
-        
         private readonly DefaultInitializer<Tuple<TState, TAction>, float> _qValues;
 
         public QLearningAgent(float epsilon, float alpha, float discount,
