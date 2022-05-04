@@ -1,21 +1,20 @@
 ﻿using GameUtilities.DataStructure;
 
-namespace GameUtilities.QLearning
+namespace GameUtilities.MachineLearning.ModelFree.LearningAgents
 {
     public class QLearningAgent<TState, TAction> : LearningAgent<TState, TAction>
         where TAction : struct, IEquatable<TAction> where TState : IEquatable<TState>
     {
         private readonly DefaultInitializer<Tuple<TState, TAction>, float> _qValues;
 
-        public QLearningAgent(float epsilon, float alpha, float discount,
-            ILearningProblem<TState, TAction> learningProblem) : base(epsilon, alpha, discount, learningProblem)
+        public QLearningAgent(float epsilon, float alpha, float discount) : 
+            base(epsilon, alpha, discount)
         {
             _qValues = new DefaultInitializer<Tuple<TState, TAction>, float>();
         }
 
-        public QLearningAgent(float epsilon, float alpha, float discount,
-            ILearningProblem<TState, TAction> learningProblem, int seed) : base(epsilon, alpha, discount,
-            learningProblem, seed)
+        public QLearningAgent(float epsilon, float alpha, float discount, int seed) : 
+            base(epsilon, alpha, discount, seed)
         {
             _qValues = new DefaultInitializer<Tuple<TState, TAction>, float>();
         }
@@ -25,12 +24,11 @@ namespace GameUtilities.QLearning
             return _qValues[new Tuple<TState, TAction>(state, action)];
         }
 
-        public override void UpdateValue(TState state, TAction action)
+        public override void UpdateValue(TState state, TAction action, TState nextState, 
+            IEnumerable<TAction> nextLegalActions, float reward)
         {
-            TState nextState = LearningProblem.GetNextState(state, action);
-            float reward = LearningProblem.GetReward(state, action);
             _qValues[new Tuple<TState, TAction>(state, action)] +=
-                Alpha * UpdatedValue(state, action, nextState, reward);
+                Alpha * UpdatedValue(state, action, nextState, nextLegalActions, reward);
         }
     }
 }
