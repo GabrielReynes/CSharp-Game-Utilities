@@ -28,6 +28,14 @@ public static class HeuristicSearch
             maximumExecutionTime, explorationParameter, new Random());
     }
     
+    public static TAction MonteCarloTreeSearch<TState, TAction>
+    (IGameTreeSearchProblem<TState, TAction> gameTreeSearchProblem, TState rootState,
+        int maxDepth, int maximumExecutionTime, double explorationParameter, int seed) where TAction : struct
+    {
+        return MonteCarloTreeSearch(gameTreeSearchProblem, rootState, maxDepth,
+            maximumExecutionTime, explorationParameter, new Random(seed));
+    }
+    
     private static TAction MonteCarloTreeSearch<TState, TAction>
         (IGameTreeSearchProblem<TState, TAction> gameTreeSearchProblem, TState rootState,
             int maxDepth, int maximumExecutionTime, double explorationParameter, Random random) 
@@ -44,7 +52,7 @@ public static class HeuristicSearch
             TState actState = rootState;
             while (actNode.Children.Count > 0)
             {
-                actNode = actNode.SelectBestChild(explorationParameter);
+                actNode = actNode.SelectPromisingChild(explorationParameter);
                 actState = gameTreeSearchProblem.GetNextState(actState, actNode.LastAction);
             }
             
@@ -74,6 +82,6 @@ public static class HeuristicSearch
             }
         }
 
-        return rootNode.SelectBestChild(0d).LastAction;
+        return rootNode.SelectBestChild().LastAction;
     }
 }

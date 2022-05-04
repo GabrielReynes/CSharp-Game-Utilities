@@ -19,9 +19,15 @@ public class MonteCarloTreeNode<TAction>
         NumberOfSimulations = 0;
     }
 
-    public MonteCarloTreeNode<TAction> SelectBestChild(double explorationParameter)
+    public MonteCarloTreeNode<TAction> SelectPromisingChild(double explorationParameter)
     {
         return Children.MaxBy(child => UctScore(child, explorationParameter))!;
+    }
+    
+    public MonteCarloTreeNode<TAction> SelectBestChild()
+    {
+        return Children.Where(child => child.NumberOfSimulations > 0)
+            .MaxBy(child => (double) child.NumberOfWins / NumberOfSimulations)!;
     }
 
     private double UctScore(MonteCarloTreeNode<TAction> child, double explorationParameter)
